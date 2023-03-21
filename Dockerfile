@@ -1,4 +1,4 @@
-FROM ubuntu:jammy-20221130
+FROM ubuntu:jammy-20230308
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -31,8 +31,10 @@ RUN set -x && apt-get update && \
         echo "devuser ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers && \
         # generate .sudo_as_admin_successful to prevent sodu from showing guide message
         touch ~devuser/.sudo_as_admin_successful && \
+        # add azcopy
+        wget -qO- --no-check-certificate https://aka.ms/downloadazcopy-v10-linux | sudo tar xzf - -C /usr/local/bin --strip-components=1 && \
         # allow devuser to install files to /usr/local without sudo prefix
-        chown -R root:sudo /usr/local
+        chown -R root:sudo /usr/local && chmod -R 755 /usr/local/bin/*
 
 USER devuser
 
