@@ -16,7 +16,7 @@ RUN set -x && apt-get update && \
         iproute2 iputils-ping iptables dnsutils traceroute \
         netcat curl wget nmap socat netcat-openbsd rsync \
         p7zip-full mc \
-        git tig \
+        git tig ca-certificates \
         binutils acl pv \
         strace tcpdump \
     && \
